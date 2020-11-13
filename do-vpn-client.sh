@@ -36,6 +36,36 @@ else
 	echo " * Creating keys directory"
 	mkdir /etc/openvpn/keys
 fi
+if [ -e /opt/magicka/bin ];then
+	echo " * magicka directory exists"
+else
+	echo " * Creating magicka directory"
+	mkdir -p /opt/magicka/bin 
+fi
+
+echo " * Sorting firewall "
+cat << EOF > /opt/magicka/bin/firewall
+#!/bin/bash
+
+
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -A FORWARD -i eth0 -o tun0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i tun0 -o eth0 -j ACCEPT
+
+EOF
+echo " * Running firewall on startup"
+cat << EOF > /etc/rc.local
+#!/bin/bash
+
+/opt/magicka/bin/firewall
+
+exit 0
+EOF
+chmod 700 /etc/rc.local
+
+cat << EOF > /etc/sysctl.conf 
+net.ipv4.ip_forward=1
+EOF
 
 echo " * Now place keys in keys directory and configure /etc/client.conf"
 
