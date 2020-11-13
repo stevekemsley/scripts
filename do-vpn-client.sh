@@ -53,6 +53,7 @@ iptables -A FORWARD -i eth0 -o tun0 -m state --state RELATED,ESTABLISHED -j ACCE
 iptables -A FORWARD -i tun0 -o eth0 -j ACCEPT
 
 EOF
+chmod 700 /opt/magicka/bin/firewall
 echo " * Running firewall on startup"
 cat << EOF > /etc/rc.local
 #!/bin/bash
