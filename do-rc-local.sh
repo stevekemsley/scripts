@@ -24,7 +24,7 @@ if [ -e /etc/systemd/system/rc-local.service ];then
 	echo " * Service script already installed"
 else 
 	echo " * Installing service script /etc/systemd/system/rc-local.service"
-	echo << EOF > /etc/systemd/system/rc-local.service
+	cat << EOF > /etc/systemd/system/rc-local.service
 [Unit]
  Description=/etc/rc.local Compatibility
  ConditionPathExists=/etc/rc.local
