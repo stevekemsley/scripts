@@ -1,0 +1,42 @@
+#!/bin/bash
+
+configured="no"
+
+#include mask
+ipaddress="10.0.1.123/24"
+gateway="10.0.1.254"
+#Make sure you know the interface name
+ifname="eth0"
+dnsnameserver1="8.8.8.8"
+#MAKE SURE YOU CHECK THIS AS SERVERS HAVE 00- AND DESKTOPS HAVE 50-
+netplanname="50-cloud-init.yaml"
+
+if [ $configured = "no" ]; then
+	echo " Please configure file before running script"
+	exit 1
+fi
+
+
+echo " * Installing net-tools"
+apt -y install net-tools 
+apt -y install bridge-utils
+
+
+cat << EOF > /etc/netplan/$netplanname
+network:
+    ethernets:
+        $ifname:
+            addresses: [$ipaddress]
+            dhcp4: false
+            optional: true
+            gateway4: "$gateway"
+            nameservers:
+                addresses: [$dnsnameserver1, 8.8.4.4]
+    version: 2
+EOF
+
+netplan apply
+
+
+exit 0
+
