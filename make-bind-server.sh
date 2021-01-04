@@ -72,6 +72,7 @@ cat << EOF > /etc/bind/$DOMAINNAME.zone
 ns      IN      A       127.0.0.1
 ;also list other computers
 papercut     IN      A       10.0.1.123
+wpad         IN      A       10.0.1.124
 EOF
 
 echo " * Creating default blockeddomains.zone"
