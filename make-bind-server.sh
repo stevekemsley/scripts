@@ -18,11 +18,12 @@ fi
 
 echo " * Installing required software"
 apt install bind9 -y
+apt install bind9-dnsutils
 apt install net-tools -y
 
 echo " * Creating named.conf.local"
 cat << EOF > /etc/bind/named.conf.local
-include "/etc/bind/blacklisted.zones";
+//include "/etc/bind/blacklisted.zones";
 
 zone "$DOMAINNAME" {
        type master;
@@ -104,8 +105,8 @@ EOF
 
 echo " * Creating youtube.zone"
 cat << EOF > /etc/bind/youtube.zone
-$ORIGIN rpz.
-$TTL 1H
+\$ORIGIN rpz.
+\$TTL 1H
 @       IN       SOA       ns.$DOMAINNAME. root.$DOMAINNAME. (
                            7
                            1H
