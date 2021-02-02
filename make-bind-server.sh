@@ -7,7 +7,7 @@ DOMAINNAME="mgka.lan"
 #IP Range you want to allow to query the server
 TRUSTED="10.0.0.0/8"
 #The DNS servers which to forward to (semicolons after each address
-FORWARDERS="8.8.8.8;8.8.4.4;"
+FORWARDERS="62.171.194.104;62.171.194.105;"
 
 
 
@@ -28,6 +28,14 @@ zone "$DOMAINNAME" {
        type master;
        file "/etc/bind/$DOMAINNAME.zone";
 };
+
+//uncomment this for restricted youtube and other response policy sites
+//zone "rpz" IN {
+// type master;
+// file "/etc/bind/youtube.zone";
+// allow-query {none;};
+//};
+
 EOF
 
 echo " * Creating /etc/bind/named.conf.options"
@@ -41,6 +49,8 @@ options {
         directory "/var/cache/bind";
         //recursion yes;
         allow-query { trusted; };
+	
+	//response-policy { zone "rpz"; };
 
         auth-nxdomain no;
 
@@ -91,6 +101,28 @@ cat << EOF > /etc/bind/blockeddomains.zone
                 AAAA    ::1 ; This means that naughydomain.com gets directed to IPv6 localhost 
 *       IN      AAAA    ::1 ; This wildcard entry means that any permutation of xxx.naughtydomain.com gets directed to IPv6 localhost 
 EOF
+
+echo " * Creating youtube.zone"
+cat << EOF > /etc/bind/youtube.zone
+$ORIGIN rpz.
+$TTL 1H
+@       IN       SOA       ns.$DOMAINNAME. root.$DOMAINNAME. (
+                           7
+                           1H
+                           15m
+                           30d
+                           2h )
+                           NS LOCALHOST.
+
+www.youtube.com           IN CNAME restrict.youtube.com.
+m.youtube.com             IN CNAME restrict.youtube.com.
+youtubei.googleapis.com   IN CNAME restrict.youtube.com.
+youtube.googleapis.com    IN CNAME restrict.youtube.com.
+www.youtube-nocookie.com  IN CNAME restrict.youtube.com.
+
+
+EOF
+
 
 echo " * Assembling blacklist"
 list=$(cat blacklist.raw)
