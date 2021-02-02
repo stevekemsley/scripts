@@ -31,11 +31,11 @@ zone "$DOMAINNAME" {
 };
 
 //uncomment this for restricted youtube and other response policy sites
-//zone "rpz" IN {
-// type master;
-// file "/etc/bind/youtube.zone";
-// allow-query {none;};
-//};
+zone "rpz" IN {
+ type master;
+ file "/etc/bind/rpz.zone";
+ allow-query {none;};
+};
 
 EOF
 
@@ -51,7 +51,7 @@ options {
         //recursion yes;
         allow-query { trusted; };
 	
-	//response-policy { zone "rpz"; };
+	response-policy { zone "rpz"; };
 
         auth-nxdomain no;
 
@@ -103,8 +103,8 @@ cat << EOF > /etc/bind/blockeddomains.zone
 *       IN      AAAA    ::1 ; This wildcard entry means that any permutation of xxx.naughtydomain.com gets directed to IPv6 localhost 
 EOF
 
-echo " * Creating youtube.zone"
-cat << EOF > /etc/bind/youtube.zone
+echo " * Creating rpz.zone"
+cat << EOF > /etc/bind/rpz.zone
 \$ORIGIN rpz.
 \$TTL 1H
 @       IN       SOA       ns.$DOMAINNAME. root.$DOMAINNAME. (
@@ -120,6 +120,9 @@ m.youtube.com             IN CNAME restrict.youtube.com.
 youtubei.googleapis.com   IN CNAME restrict.youtube.com.
 youtube.googleapis.com    IN CNAME restrict.youtube.com.
 www.youtube-nocookie.com  IN CNAME restrict.youtube.com.
+pool.ntp.org              IN CNAME ntp.swgfl.org.uk.
+time.windows.com          IN CNAME ntp.swgfl.org.uk.
+time.nist.gov             IN CNAME ntp.swgfl.org.uk.
 
 
 EOF
