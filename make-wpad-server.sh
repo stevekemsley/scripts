@@ -49,7 +49,7 @@ function FindProxyForURL(url, host) {
 
         return "PROXY nossl.proxy1.rmsafetynet.com:8080";
 }
-
+EOF
 
 exit 0
 
