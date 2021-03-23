@@ -12,7 +12,7 @@ wget http://remote.magicka.co.uk/gohttp -O /usr/bin/gohttp
 echo " * Making wpad dir"
 mkdir /var/lib/tftpboot/www/wpad -p
 echo " * Making default wpad.dat"
-cat << EOF > /var/lib/tftpboot/www/wpad.dat
+cat << EOF > /var/lib/tftpboot/www/wpad/default.dat
 function FindProxyForURL(url, host) {
         if(isPlainHostName(host)) {
                 return "DIRECT"
@@ -25,7 +25,7 @@ function FindProxyForURL(url, host) {
             isInNet(resolved_ip, "127.0.0.0", "255.255.255.0"))
             return "DIRECT";
         
-        if (localHostOrDomainIs("$DOMAINNAME") {
+	if (localHostOrDomainIs("$DOMAINNAME")) {
                 return "DIRECT";
         }
 
@@ -47,7 +47,7 @@ function FindProxyForURL(url, host) {
             isInNet(resolved_ip, "127.0.0.0", "255.255.255.0"))
             return "DIRECT";
 
-        if (localHostOrDomainIs("$DOMAINNAME") {
+	if (localHostOrDomainIs("$DOMAINNAME")) {
                 return "DIRECT";
         }
 
