@@ -45,6 +45,15 @@ else
 	cd ~/.vim/pack/dist/start/tagbar
 	git pull
 fi
+#typescript-vim
+if [ ! -e ~/.vim/pack/typescript/start/typescript-vim ]; then
+	echo " * Cloning typescript-vim"
+	git clone https://github.com/leafgarland/typescript-vim.git ~/.vim/pack/typescript/start/typescript-vim
+else 
+	echo " * Updating typescript-vim"
+	cd ~/.vim/pack/typescript/start/typescript-vim
+	git pull
+fi
 
 
 exit 0
