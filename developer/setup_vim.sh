@@ -1,16 +1,51 @@
 #!/bin/bash
 
-echo " * Cleaning" 
-
-
 #vim-go
-git clone https://github.com/fatih/vim-go.git ~/.vim/pack/plugins/start/vim-go
+if [ ! -e ~/.vim/pack/plugins/start/vim-go ]; then
+	echo " * Cloning vim-go"
+	git clone https://github.com/fatih/vim-go.git ~/.vim/pack/plugins/start/vim-go
+else 
+	echo " * Updating vim-go"
+	cd ~/.vim/pack/plugins/start/vim-go
+	git pull
+fi
 #nerdtree
-git clone https://github.com/scrooloose/nerdtree.git ~/.vim/pack/dist/start/nerdtree
+if [ ! -e ~/.vim/pack/dist/start/nerdtree ]; then
+	echo " * Cloning nerdtree"
+	git clone https://github.com/scrooloose/nerdtree.git ~/.vim/pack/dist/start/nerdtree
+else 
+	echo " * Updating nerdtree"
+	cd ~/.vim/pack/dist/start/nerdtree
+	git pull
+fi
 #vim-airline
-git clone https://github.com/vim-airline/vim-airline ~/.vim/pack/dist/start/vim-airline
+if [ ! -e ~/.vim/pack/dist/start/vim-airline ]; then
+	echo " * Cloning vim-airline"
+	git clone https://github.com/vim-airline/vim-airline ~/.vim/pack/dist/start/vim-airline
+else 
+	echo " * Updating vim-airline"
+	cd ~/.vim/pack/dist/start/vim-airline
+	git pull
+fi
 #vim-fugitive 
-git clone https://github.com/tpope/vim-fugitive.git ~/.vim/pack/dist/start/vim-fugitive
+if [ ! -e ~/.vim/pack/dist/start/vim-fugitive ]; then
+	echo " * Cloning vim-fugitive"
+	git clone https://github.com/tpope/vim-fugitive.git ~/.vim/pack/dist/start/vim-fugitive
+else 
+	echo " * Updating vim-fugitive"
+	cd ~/.vim/pack/dist/start/vim-fugitive
+	git pull
+fi
+#tagbar
+if [ ! -e ~/.vim/pack/dist/start/tagbar ]; then
+	echo " * Cloning tagbar"
+	git clone https://github.com/preservim/tagbar.git ~/.vim/pack/dist/start/tagbar
+else 
+	echo " * Updating tagbar"
+	cd ~/.vim/pack/dist/start/tagbar
+	git pull
+fi
+
 
 exit 0
 
