@@ -54,6 +54,15 @@ else
 	cd ~/.vim/pack/typescript/start/typescript-vim
 	git pull
 fi
+#emmet-vim for developing html5 
+if [ ! -e ~/.vim/pack/dist/start/emmet-vim ]; then
+	echo " * Cloning emmet-vim"
+	git clone https://github.com/mattn/emmet-vim.git ~/.vim/pack/dist/start/emmet-vim
+else 
+	echo " * Updating emmet-vim"
+	cd ~/.vim/pack/dist/start/emmet-vim
+	git pull
+fi
 
 
 exit 0
