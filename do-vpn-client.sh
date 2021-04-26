@@ -12,6 +12,9 @@ remote <ipaddress> <port>
 
 ncp-ciphers AES-128-GCM:AES-256-GCM:AES-128-CBC:AES-256-CBC
 
+#http-proxy-retry
+#http-proxy proxy.swgfl.org.uk 8080
+
 #auth-user-pass /etc/openvpn/pass.txt
 
 resolv-retry infinite
