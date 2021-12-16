@@ -64,7 +64,7 @@ options {
         // If BIND logs error messages about the root key being expired,
         // you will need to update your keys.  See https://www.isc.org/bind-keys
         //========================================================================
-        dnssec-validation auto;
+        dnssec-validation no;
 
         //listen-on-v6 { any; };
 };
