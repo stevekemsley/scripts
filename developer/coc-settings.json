@@ -1,0 +1,44 @@
+{
+    "coc.preferences.formatOnSaveFiletypes": [
+        "css",
+        "Markdown",
+        "html",
+        "javascript",
+        "typescript"
+    ],
+    "diagnostic.floatConfig": {
+        "border": true,
+        "borderhighlight": "FloatBorder",
+        "winblend": 15
+    },
+    "dialog.floatBorderHighlight": "FloatBorder",
+    "hover.floatConfig": {
+        "border": true,
+        "borderhighlight": "FloatBorder",
+        "winblend": 15
+    },
+    "languageserver": {
+        "golang": {
+            "command": "gopls",
+            "filetypes": [
+                "go"
+            ],
+            "rootPatterns": [
+                "go.mod",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ]
+        }
+    },
+    "signature.floatConfig": {
+        "border": true,
+        "borderhighlight": "FloatBorder",
+        "winblend": 15
+    },
+    "suggest.floatConfig": {
+        "border": true,
+        "borderhighlight": "FloatBorder",
+        "winblend": 15
+    }
+}
