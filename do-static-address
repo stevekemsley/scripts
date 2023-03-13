@@ -22,6 +22,8 @@ apt -y install net-tools
 apt -y install bridge-utils
 
 
+if [ -e /etc/netplan ]; then
+	echo "Setting up for netplan"
 cat << EOF > /etc/netplan/$netplanname
 network:
     ethernets:
@@ -34,9 +36,17 @@ network:
                 addresses: [$dnsnameserver1, 8.8.4.4]
     version: 2
 EOF
-
 netplan apply
-
-
+else
+	echo "Setting up for interfaces"
+cat << EOF > /etc/network/interfaces 
+auto eth0
+iface eth0 inet static
+address $ipaddress
+gateway $gateway
+dns-nameservers $dnsnameserver,8.8.4.4
+dns-search mgka.lan
+EOF
+fi
 exit 0
 
