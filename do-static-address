@@ -6,13 +6,17 @@ configured="no"
 ipaddress="10.0.1.123/24"
 gateway="10.0.1.254"
 #Make sure you know the interface name
-ifname="eth0"
+ifname=""
 dnsnameserver1="8.8.8.8"
 #MAKE SURE YOU CHECK THIS AS SERVERS HAVE 00- AND DESKTOPS HAVE 50-
 netplanname="50-cloud-init.yaml"
 
 if [ $configured = "no" ]; then
 	echo " Please configure file before running script"
+	exit 1
+fi
+if [ $ifname = "" ]; then
+	echo " Please configure interface name"
 	exit 1
 fi
 
@@ -40,8 +44,8 @@ netplan apply
 else
 	echo "Setting up for interfaces"
 cat << EOF > /etc/network/interfaces 
-auto eth0
-iface eth0 inet static
+auto $ifname
+iface $ifname inet static
 address $ipaddress
 gateway $gateway
 dns-nameservers $dnsnameserver,8.8.4.4
