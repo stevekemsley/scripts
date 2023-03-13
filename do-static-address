@@ -48,7 +48,7 @@ auto $ifname
 iface $ifname inet static
 address $ipaddress
 gateway $gateway
-dns-nameservers $dnsnameserver,8.8.4.4
+dns-nameservers $dnsnameserver1,8.8.4.4
 dns-search mgka.lan
 EOF
 fi
