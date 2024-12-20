@@ -78,9 +78,13 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+" Redefine the mapleader to space so you can quickly initilise it
+let g:mapleader = " "
 
-
-
+" Copilot Ai 
+Plug 'github/copilot.vim'
+let g:copilot_no_tab_map = v:true
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 
 " Status bar Plugin
 Plug 'vim-airline/vim-airline'
@@ -90,6 +94,18 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Git plugin
 Plug 'tpope/vim-fugitive'
+
+
+" Telescope https://github.com/nvim-telescope/telescope.nvim
+" checkhealth telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
@@ -174,6 +190,8 @@ if exists("*fugitive#statusline")
 endif
 
 colorscheme koehler
+
+set guicursor=i:block
 
 "Saves the position of screen at exit 
 autocmd BufWinLeave *.* mkview 
