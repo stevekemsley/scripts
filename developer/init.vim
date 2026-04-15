@@ -35,6 +35,17 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" Alternatively, use Ctrl + Arrow keys if you prefer
+nnoremap <S-Right> :bnext<CR>
+nnoremap <S-Left> :bprevious<CR>
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
+" Map Space + t + n to open a new tab
+nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>tc :tabclose<CR>
+nnoremap <leader>t= :tabnext<CR>
+nnoremap <leader>t- :tabprevious<CR>
+
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -57,6 +68,7 @@ nmap <leader>rn <Plug>(coc-rename)
 " Remap for format selected region
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
@@ -79,12 +91,14 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Redefine the mapleader to space so you can quickly initilise it
-let g:mapleader = " "
+" let g:mapleader = " "
 
-" Copilot Ai 
-Plug 'github/copilot.vim'
-let g:copilot_no_tab_map = v:true
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+" Startify
+Plug 'mhinz/vim-startify'
+" Obsession
+Plug 'tpope/vim-obsession'
+" ALE
+Plug 'dense-analysis/ale'
 
 " Status bar Plugin
 Plug 'vim-airline/vim-airline'
@@ -152,6 +166,9 @@ let g:session_autosave = 'yes'
 " Gitgutter ------------------------------------------------------------
 Plug 'airblade/vim-gitgutter'
 
+" Rust -----------------------------------------------------------------
+Plug 'rust-lang/rust.vim'
+
 
 " Initialize plugin system
 call plug#end()
@@ -191,11 +208,12 @@ endif
 
 colorscheme koehler
 
-set guicursor=i:block
-
 "Saves the position of screen at exit 
 autocmd BufWinLeave *.* mkview 
 
 "Restores screen last position 
 autocmd BufWinEnter *.* silent loadview
+
+
+
 
